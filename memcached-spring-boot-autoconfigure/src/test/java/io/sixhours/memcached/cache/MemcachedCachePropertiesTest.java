@@ -47,16 +47,18 @@ public class MemcachedCachePropertiesTest {
     public void whenGetProvider_thenCorrectValue() {
         MemcachedCacheProperties.Provider result = memcachedCacheProperties.getProvider();
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(MemcachedCacheProperties.Provider.AWS);
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(MemcachedCacheProperties.Provider.AWS);
     }
 
     @Test
     public void whenGetServers_thenCorrectValue() {
         List<InetSocketAddress> result = memcachedCacheProperties.getServers();
 
-        assertThat(result).isNotNull();
-        assertThat(result.isEmpty()).isFalse();
+        assertThat(result)
+                .isNotNull()
+                .isNotEmpty();
         assertThat(result.size()).isEqualTo(2);
         // @formatter:off
         assertThat(result).extracting("hostName", "port")
@@ -71,73 +73,79 @@ public class MemcachedCachePropertiesTest {
     public void whenGetPrefix_thenCorrectValue() {
         String result = memcachedCacheProperties.getPrefix();
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo("memcached:my-app");
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo("memcached:my-app");
     }
 
     @Test
     public void whenGetProtocol_thenCorrectValue() {
         MemcachedCacheProperties.Protocol result = memcachedCacheProperties.getProtocol();
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualByComparingTo(MemcachedCacheProperties.Protocol.BINARY);
+        assertThat(result)
+                .isNotNull()
+                .isEqualByComparingTo(MemcachedCacheProperties.Protocol.BINARY);
     }
 
     @Test
     public void whenGetOperationTimeout_thenCorrectValue() {
         Duration result = memcachedCacheProperties.getOperationTimeout();
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(Duration.ofMillis(7200));
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(Duration.ofMillis(7200));
     }
 
     @Test
     public void whenGetServersRefreshInterval_thenCorrectValue() {
         Duration result = memcachedCacheProperties.getServersRefreshInterval();
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(Duration.ofMillis(30000));
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(Duration.ofMillis(30000));
     }
 
     @Test
     public void whenGetExpiration_thenCorrectValue() {
         Duration result = memcachedCacheProperties.getExpiration();
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(Duration.ofSeconds(86400));
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(Duration.ofSeconds(86400));
     }
 
     @Test
     public void whenGetDisabledCaches_thenCorrectValue() {
         Set<String> result = memcachedCacheProperties.getDisableCacheNames();
 
-        assertThat(result).isNotNull();
-        assertThat(result).hasSize(2);
-        assertThat(result).contains("disabled_cache_name");
-        assertThat(result).contains("something");
+        assertThat(result)
+                .isNotNull()
+                .hasSize(2)
+                .contains("disabled_cache_name")
+                .contains("something");
     }
 
     @Test
     public void whenGetExpirationPerCache_thenCorrectValue() {
         Map<String, Duration> result = memcachedCacheProperties.getExpirationPerCache();
 
-        assertThat(result).isNotNull();
-        assertThat(result.isEmpty()).isFalse();
-        assertThat(result.size()).isEqualTo(4);
-        // @formatter:off
-        assertThat(result).contains(
-                entry("cache_name1", Duration.ofSeconds(3600)),
-                entry("cache_name2", Duration.ofSeconds(108000)),
-                entry("cache_name3", Duration.ofSeconds(7200))
-        );
-        // @formatter:on
+        assertThat(result)
+                .isNotNull()
+                .isNotEmpty()
+                .hasSize(4)
+                .contains(
+                        entry("cache_name1", Duration.ofSeconds(3600)),
+                        entry("cache_name2", Duration.ofSeconds(108000)),
+                        entry("cache_name3", Duration.ofSeconds(7200))
+                );
     }
 
     @Test
     public void whenGetHashStrategy_thenCorrectValue() {
         MemcachedCacheProperties.HashStrategy result = memcachedCacheProperties.getHashStrategy();
 
-        assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(MemcachedCacheProperties.HashStrategy.KETAMA);
+        assertThat(result)
+                .isNotNull()
+                .isEqualTo(MemcachedCacheProperties.HashStrategy.KETAMA);
     }
 }
